@@ -1,0 +1,97 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  color: #eeeeee;
+  background: #7f77c8;
+  //   max-width: 80%;
+  border-radius: 8px;
+  -webkit-box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.75);
+
+  h2 {
+    margin: 35px 0;
+    font-weight: bold;
+    font-size: 1.5rem;
+  }
+
+  .footer {
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    width: 80%;
+    height: 100px;
+    background-color: #8ab5f1;
+    clip-path: polygon(63% 68%, 100% 25%, 100% 100%, 0 100%, 0 0);
+  }
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  margin-top: 35px;
+  padding: 0 35px;
+
+  .label {
+    position: absolute;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    // font-size: 1rem;
+    pointer-events: none;
+  }
+
+  .input {
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    border-bottom: solid 1px white;
+    outline: none;
+    font-size: 0.9rem;
+
+    &:focus ~ label,
+    &:valid ~ label {
+      margin-top: -25px;
+      -webkit-transition: all 0.5s ease;
+      -moz-transition: all 0.5s ease;
+      -ms-transition: all 0.5s ease;
+      -o-transition: all 0.5s ease;
+      transition: all 0.5s ease;
+    }
+  }
+}
+
+.btn {
+  color: #eeeeee;
+  background-color: #a59ee3;
+  outline: none;
+  padding: 3px;
+  margin-bottom: 15px;
+  padding-bottom: 0;
+  margin-top: 50px;
+  font-size: 1.25rem;
+  //   border: none;
+  border-color: #7f77c8;
+  font-weight: bold;
+  padding: 5px;
+  //   border-bottom: solid 1px white;
+  -webkit-transition: all 1s linear;
+  -moz-transition: all 1s linear;
+  -ms-transition: all 1s linear;
+  -o-transition: all 1s linear;
+  transition: all 1s linear;
+
+  &:hover {
+    color: #bbe1fa;
+    border-bottom: solid 1px #bbe1fa;
+    -webkit-transition: all 1s linear;
+    -moz-transition: all 1s linear;
+    -ms-transition: all 1s linear;
+    -o-transition: all 1s linear;
+    transition: all 1s linear;
+  }
+}
