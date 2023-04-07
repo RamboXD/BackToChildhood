@@ -2,10 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import "./Admin.scss";
-import { setLogin } from "../state/index.js";
+import { setLogin, setLogout } from "../state/index.js";
 export default function Admin() {
   const isAuth = Boolean(useSelector((state) => state.token));
-  const [statusData, setStatusData] = useState([]);
+  const adminToken = useSelector((state) => state.token);
+  const adminId = useSelector((state) => state.id);
+  const adminTask = useSelector((state) => state.task);
+  const [statusData, setStatusData] = useState();
   const dispatch = useDispatch();
   const [user, setUser] = useState();
   const navigate = useNavigate();
@@ -15,32 +18,68 @@ export default function Admin() {
     if (items) {
       setUser(items);
     }
-    // setStatusData([
-    //   { teamNumber: 1, teamName: "tigr", passed: false },
-    //   { teamNumber: 2, teamName: "begemot", passed: false },
-    //   { teamNumber: 3, teamName: "zveri", passed: false },
-    //   { teamNumber: 4, teamName: "auf", passed: false },
-    //   { teamNumber: 5, teamName: "hans", passed: false },
-    //   { teamNumber: 6, teamName: "Kazakh", passed: false },
-    //   { teamNumber: 7, teamName: "bestTeam", passed: false },
-    //   { teamNumber: 8, teamName: "SpongeBob", passed: false },
-    //   { teamNumber: 9, teamName: "GGWP", passed: false },
-    //   { teamNumber: 10, teamName: "HEHE", passed: false },
-    // ]);
     getTeams();
+    getAdmin();
   }, []);
-  console.log(user);
+  // console.log(user);
+  // console.log(teams);
+  // console.log(statusData);
+  if (teams && user && !statusData) {
+    const result = teams.map((team) => {
+      if (user.passed.find((element) => element === team._id))
+        return { ...team, passed: true };
+      else return { ...team, passed: false };
+    });
+    // console.log(result);
+    setStatusData(result);
+  }
+
   const getTeams = async () => {
     const response = await fetch("http://localhost:3001/team/status", {
       method: "GET",
     });
     const data = await response.json();
-    setStatusData(data);
+    setTeams(data);
   };
-  console.log(teams);
+  const getAdmin = async () => {
+    const response = await fetch(`http://localhost:3001/admin/${adminId}`, {
+      method: "GET",
+      headers: { Authorization: `Bearer ${adminToken}` },
+    });
+    const data = await response.json();
+    setUser(data);
+  };
+  const changeStatusBack = async (teamID) => {
+    // const object = { teamID: `${teamID}` };
+    const response = await fetch(`http://localhost:3001/admin/${adminId}`, {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${adminToken}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ teamID: `${teamID}` }),
+    });
+    const responseText = await response.text();
+    // console.log(responseText);
+  };
+  const changeTeamStatusBack = async (teamID) => {
+    // const object = { teamID: `${teamID}` };
+    const response = await fetch(`http://localhost:3001/team/${teamID}`, {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${adminToken}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ task: adminTask }),
+    });
+    const responseText = await response.text();
+    // console.log(responseText);
+  };
   function changeStatus(current) {
+    changeStatusBack(current._id);
+    changeTeamStatusBack(current._id);
     const newStatus = statusData.map((e) => {
-      if (e.teamNumber === current.teamNumber) {
+      if (e._id === current._id) {
         e.passed = !e.passed;
       }
       return e;
@@ -51,7 +90,7 @@ export default function Admin() {
     login: "",
     password: "",
   });
-  console.log(values);
+  // console.log(values);
   const login = async (values) => {
     const loggedInResponse = await fetch("http://localhost:3001/auth/login", {
       method: "POST",
@@ -62,14 +101,21 @@ export default function Admin() {
     // onSubmitProps.resetForm();
 
     if (loggedIn) {
+      console.log(loggedIn);
       dispatch(
         setLogin({
           admin: loggedIn.admin,
           token: loggedIn.token,
+          id: loggedIn.admin._id,
+          task: loggedIn.admin.task,
         })
       );
       navigate("/admin");
     }
+  };
+  const logout = () => {
+    dispatch(setLogout());
+    navigate("/admin");
   };
 
   if (!isAuth) {
@@ -83,16 +129,18 @@ export default function Admin() {
             justifyContent: "center",
           }}
         >
-          <Link style={{ height: "50%", width: "90%" }} to={"/"}>
-            <button
-              style={{
-                height: "100%",
-                width: "100%",
-              }}
-            >
-              Status
-            </button>
-          </Link>
+          <div style={{ height: "50%", width: "90%" }}>
+            <Link style={{ height: "100%", width: "30%" }} to={"/"}>
+              <button
+                style={{
+                  height: "100%",
+                  width: "100%",
+                }}
+              >
+                Status
+              </button>
+            </Link>
+          </div>
         </div>
         <div
           style={{
@@ -151,7 +199,7 @@ export default function Admin() {
       </div>
     );
   } else {
-    if (!teams) {
+    if (!statusData) {
       return null;
     } else
       return (
@@ -164,9 +212,42 @@ export default function Admin() {
               justifyContent: "center",
             }}
           >
-            <Link style={{ height: "50%", width: "80%" }} to={"/"}>
-              <button style={{ height: "100%", width: "100%" }}>Status</button>
-            </Link>
+            <div
+              style={{
+                width: "100%",
+                height: "100%",
+                display: "flex",
+                justifyContent: "space-around",
+              }}
+            >
+              <button
+                onClick={() => {
+                  navigate("/");
+                }}
+                style={{ height: "50%", width: "30%" }}
+              >
+                Status
+              </button>
+              <button
+                style={{
+                  height: "50%",
+                  width: "30%",
+                }}
+              >
+                INFO
+              </button>
+              <button
+                style={{
+                  height: "50%",
+                  width: "30%",
+                }}
+                onClick={() => {
+                  logout();
+                }}
+              >
+                LogOut
+              </button>
+            </div>
           </div>
           <div
             style={{

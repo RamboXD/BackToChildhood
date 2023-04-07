@@ -8,6 +8,6 @@ router.post("/", verifyToken, createTeam);
 
 router.get("/status", getTeams);
 
-router.patch("/:id", updateTask);
+router.patch("/:id", verifyToken, updateTask);
 
 export default router;

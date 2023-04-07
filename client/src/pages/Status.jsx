@@ -1,24 +1,35 @@
 import React, { useEffect, useState } from "react";
+import BG from "../assets/funny.jpg";
 import { Link } from "react-router-dom";
 
 export default function Status() {
   const [statusData, setStatusData] = useState([]);
   const [tasks, setTasks] = useState([]);
+  console.log(statusData);
   useEffect(() => {
-    setStatusData([
-      { teamNumber: 1, teamName: "tigr", passed: [1] },
-      { teamNumber: 2, teamName: "begemot", passed: [2] },
-      { teamNumber: 3, teamName: "zveri", passed: [3] },
-      { teamNumber: 4, teamName: "auf", passed: [4] },
-      { teamNumber: 5, teamName: "hans", passed: [5] },
-      { teamNumber: 6, teamName: "Kazakh", passed: [6] },
-      { teamNumber: 7, teamName: "bestTeam", passed: [7] },
-      { teamNumber: 8, teamName: "SpongeBob", passed: [8] },
-      { teamNumber: 9, teamName: "GGWP", passed: [9] },
-      { teamNumber: 10, teamName: "HEHE", passed: [10] },
-    ]);
+    // setStatusData([
+    //   { teamNumber: 1, teamName: "tigr", passed: [1] },
+    //   { teamNumber: 2, teamName: "begemot", passed: [2] },
+    //   { teamNumber: 3, teamName: "zveri", passed: [3] },
+    //   { teamNumber: 4, teamName: "auf", passed: [4] },
+    //   { teamNumber: 5, teamName: "hans", passed: [5] },
+    //   { teamNumber: 6, teamName: "Kazakh", passed: [6] },
+    //   { teamNumber: 7, teamName: "bestTeam", passed: [7] },
+    //   { teamNumber: 8, teamName: "SpongeBob", passed: [8] },
+    //   { teamNumber: 9, teamName: "GGWP", passed: [9] },
+    //   { teamNumber: 10, teamName: "HEHE", passed: [10] },
+    // ]);
     setTasks([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+
+    getTeams();
   }, []);
+  const getTeams = async () => {
+    const response = await fetch("http://localhost:3001/team/status", {
+      method: "GET",
+    });
+    const data = await response.json();
+    setStatusData(data);
+  };
 
   return (
     <div style={{ height: "100%", width: "100%" }}>
@@ -31,7 +42,17 @@ export default function Status() {
         }}
       >
         <Link style={{ height: "50%", width: "90%" }} to={"/admin"}>
-          <button style={{ height: "100%", width: "100%", fontSize: "4vw" }}>
+          <button
+            style={{
+              height: "100%",
+              width: "100%",
+              fontSize: "4vw",
+              // backgroundImage: `url(${BG})`,
+              backgroundColor: "#ffffff",
+              // backgroundSize: "cover",
+              // backgroundRepeat: "no-repeat",
+            }}
+          >
             I am Admin
           </button>
         </Link>
@@ -49,7 +70,7 @@ export default function Status() {
           style={{
             width: "90%",
             height: "100%",
-            backgroundColor: "#b3ffcc",
+            backgroundColor: "transparent",
             borderRadius: "5px",
             border: "solid",
             borderWidth: "1px",
@@ -64,7 +85,7 @@ export default function Status() {
               style={{
                 height: "10%",
                 width: "100%",
-                borderBottom: "0.5px solid",
+                borderTop: "0.5px solid",
                 display: "flex",
               }}
             >
@@ -76,6 +97,8 @@ export default function Status() {
                   fontSize: "2.5vw",
                   justifyContent: "center",
                   alignItems: "center",
+                  fontWeight: "bold",
+                  color: "#000000",
                 }}
               >
                 {stat.teamName}
@@ -84,7 +107,7 @@ export default function Status() {
                 {tasks.map((task) => (
                   <div
                     style={
-                      stat.passed.find((element) => {
+                      stat.tasksDone.find((element) => {
                         return element === task;
                       }) === task
                         ? {
@@ -95,7 +118,8 @@ export default function Status() {
                             alignItems: "center",
                             borderLeft: "0.5px solid",
                             fontSize: "3vw",
-                            backgroundColor: "green",
+                            // backgroundColor: "#ccff99",
+                            backgroundColor: "#6dff6a",
                           }
                         : {
                             height: "100%",
@@ -105,7 +129,8 @@ export default function Status() {
                             alignItems: "center",
                             fontSize: "3vw",
                             borderLeft: "0.5px solid",
-                            backgroundColor: "red",
+                            backgroundColor: "#f92f2f",
+                            // backgroundColor: "transparent",
                           }
                     }
                   >
