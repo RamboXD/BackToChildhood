@@ -17,9 +17,9 @@ export default function Admin() {
     const items = JSON.parse(localStorage.getItem("admin"));
     if (items) {
       setUser(items);
+      getAdmin();
+      getTeams();
     }
-    getTeams();
-    getAdmin();
   }, []);
   // console.log(user);
   // console.log(teams);
@@ -132,7 +132,7 @@ export default function Admin() {
     dispatch(setLogout());
     navigate("/admin");
   };
-
+  console.log(isAuth);
   if (!isAuth) {
     return (
       <div style={{ height: "100%", width: "100%" }}>
@@ -155,6 +155,17 @@ export default function Admin() {
                 Status
               </button>
             </Link>
+            {/* <button
+                style={{
+                  height: "50%",
+                  width: "30%",
+                }}
+                onClick={() => {
+                  logout();
+                }}
+              >
+                LogOut
+              </button> */}
           </div>
         </div>
         <div
