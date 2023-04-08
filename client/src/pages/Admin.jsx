@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import "./Admin.scss";
-import { setLogin, setLogout } from "../state/index.js";
+import { setLogin, setLogout, setTasks } from "../state/index.js";
 export default function Admin() {
   const isAuth = useSelector((state) => state.admin);
   const adminToken = useSelector((state) => state.token);
@@ -70,6 +70,14 @@ export default function Admin() {
       }
     );
     const responseText = await response.text();
+    // if (responseText) {
+    //   isAuth.passed = responseTe
+    //   dispatch(
+    //     setTasks({
+    //       admin: responseText.admin,
+    //     })
+    //   );
+    // }
     // console.log(responseText);
   };
   const changeTeamStatusBack = async (teamID) => {

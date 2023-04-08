@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Status.scss";
+import { useDispatch } from "react-redux";
+import { setLogout } from "../state/index.js";
 
 export default function Status() {
   const [statusData, setStatusData] = useState([]);
   const [tasks, setTasks] = useState([]);
   // console.log(statusData);
   const [loading, setLoading] = useState(false);
-
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   useEffect(() => {
     setLoading(true);
     setTimeout(() => {
@@ -39,7 +42,10 @@ export default function Status() {
     const data = await response.json();
     setStatusData(data);
   };
-
+  const logout = () => {
+    dispatch(setLogout());
+    navigate("/admin");
+  };
   return (
     <div style={{ height: "100%", width: "100%" }}>
       {loading ? (
@@ -82,6 +88,17 @@ export default function Status() {
                 I am Admin
               </button>
             </Link>
+            {/* <button
+              style={{
+                height: "60%",
+                width: "30%",
+              }}
+              onClick={() => {
+                logout();
+              }}
+            >
+              LogOut
+            </button> */}
           </div>
           <div
             style={{
