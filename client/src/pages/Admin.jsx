@@ -241,7 +241,7 @@ export default function Admin() {
           <div
             style={{
               width: "100%",
-              height: "20%",
+              height: "12.5%",
               display: "flex",
               justifyContent: "center",
             }}
@@ -258,13 +258,13 @@ export default function Admin() {
                 onClick={() => {
                   navigate("/");
                 }}
-                style={{ height: "50%", width: "30%" }}
+                style={{ height: "60%", width: "30%" }}
               >
                 Status
               </button>
               <button
                 style={{
-                  height: "50%",
+                  height: "60%",
                   width: "30%",
                 }}
               >
@@ -272,7 +272,7 @@ export default function Admin() {
               </button>
               <button
                 style={{
-                  height: "50%",
+                  height: "60%",
                   width: "30%",
                 }}
                 onClick={() => {
@@ -286,6 +286,7 @@ export default function Admin() {
           <div
             style={{
               width: "100%",
+              overflow: "scroll",
               height: "80%",
               display: "flex",
               flexDirection: "column",
