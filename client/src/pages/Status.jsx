@@ -25,7 +25,7 @@ export default function Status() {
   }, []);
   const getTeams = async () => {
     const response = await fetch(
-      "http://back-to-childhood.vercel.app/team/status",
+      "https://back-to-childhood.vercel.app/team/status",
       {
         method: "GET",
       }

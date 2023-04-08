@@ -36,7 +36,7 @@ export default function Admin() {
 
   const getTeams = async () => {
     const response = await fetch(
-      "http://back-to-childhood.vercel.app/team/status",
+      "https://back-to-childhood.vercel.app/team/status",
       {
         method: "GET",
       }
@@ -46,7 +46,7 @@ export default function Admin() {
   };
   const getAdmin = async () => {
     const response = await fetch(
-      `http://back-to-childhood.vercel.app/admin/${adminId}`,
+      `https://back-to-childhood.vercel.app/admin/${adminId}`,
       {
         method: "GET",
         headers: { Authorization: `Bearer ${adminToken}` },
@@ -58,7 +58,7 @@ export default function Admin() {
   const changeStatusBack = async (teamID) => {
     // const object = { teamID: `${teamID}` };
     const response = await fetch(
-      `http://back-to-childhood.vercel.app/admin/${adminId}`,
+      `https://back-to-childhood.vercel.app/admin/${adminId}`,
       {
         method: "PATCH",
         headers: {
@@ -74,7 +74,7 @@ export default function Admin() {
   const changeTeamStatusBack = async (teamID) => {
     // const object = { teamID: `${teamID}` };
     const response = await fetch(
-      `http://back-to-childhood.vercel.app/team/${teamID}`,
+      `https://back-to-childhood.vercel.app/team/${teamID}`,
       {
         method: "PATCH",
         headers: {
@@ -104,11 +104,14 @@ export default function Admin() {
   });
   // console.log(values);
   const login = async (values) => {
-    const loggedInResponse = await fetch("http://localhost:3001/auth/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(values),
-    });
+    const loggedInResponse = await fetch(
+      "https://back-to-childhood.vercel.app/auth/login",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(values),
+      }
+    );
     const loggedIn = await loggedInResponse.json();
     // onSubmitProps.resetForm();
 
