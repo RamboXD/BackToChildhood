@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import "./Admin.scss";
 import { setLogin, setLogout } from "../state/index.js";
 export default function Admin() {
-  const isAuth = Boolean(useSelector((state) => state.token));
+  const isAuth = useSelector((state) => state.admin);
   const adminToken = useSelector((state) => state.token);
   const adminId = useSelector((state) => state.id);
   const adminTask = useSelector((state) => state.task);
@@ -14,9 +14,10 @@ export default function Admin() {
   const navigate = useNavigate();
   const [teams, setTeams] = useState();
   useEffect(() => {
-    const items = JSON.parse(localStorage.getItem("admin"));
-    if (items) {
-      setUser(items);
+    // const items = JSON.parse(localStorage.getItem("admin"));
+    // console.log(items);
+    if (isAuth) {
+      setUser(isAuth);
       getAdmin();
       getTeams();
     }
@@ -125,7 +126,8 @@ export default function Admin() {
           task: loggedIn.admin.task,
         })
       );
-      navigate("/admin");
+      // window.location.reload(false);
+      // navigate("/admin");
     }
   };
   const logout = () => {
@@ -133,6 +135,9 @@ export default function Admin() {
     navigate("/admin");
   };
   console.log(isAuth);
+  console.log(teams);
+  console.log(user);
+  console.log(statusData);
   if (!isAuth) {
     return (
       <div style={{ height: "100%", width: "100%" }}>
@@ -226,7 +231,10 @@ export default function Admin() {
     );
   } else {
     if (!statusData) {
-      return null;
+      <div style={{ height: "100%", width: "100%" }} className="loading">
+        <div></div>
+        <div></div>
+      </div>;
     } else
       return (
         <div style={{ height: "100%", width: "100%" }}>
