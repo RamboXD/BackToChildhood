@@ -17,7 +17,7 @@ export default function Admin() {
     // const items = JSON.parse(localStorage.getItem("admin"));
     // console.log(items);
     if (isAuth) {
-      setUser(isAuth);
+      // setUser(isAuth);
       getAdmin();
       getTeams();
     }
