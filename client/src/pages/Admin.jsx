@@ -126,7 +126,7 @@ export default function Admin() {
           task: loggedIn.admin.task,
         })
       );
-      // window.location.reload(false);
+      window.location.reload(false);
       // navigate("/admin");
     }
   };
