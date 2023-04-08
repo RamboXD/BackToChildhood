@@ -35,43 +35,55 @@ export default function Admin() {
   }
 
   const getTeams = async () => {
-    const response = await fetch("http://localhost:3001/team/status", {
-      method: "GET",
-    });
+    const response = await fetch(
+      "http://back-to-childhood.vercel.app/team/status",
+      {
+        method: "GET",
+      }
+    );
     const data = await response.json();
     setTeams(data);
   };
   const getAdmin = async () => {
-    const response = await fetch(`http://localhost:3001/admin/${adminId}`, {
-      method: "GET",
-      headers: { Authorization: `Bearer ${adminToken}` },
-    });
+    const response = await fetch(
+      `http://back-to-childhood.vercel.app/admin/${adminId}`,
+      {
+        method: "GET",
+        headers: { Authorization: `Bearer ${adminToken}` },
+      }
+    );
     const data = await response.json();
     setUser(data);
   };
   const changeStatusBack = async (teamID) => {
     // const object = { teamID: `${teamID}` };
-    const response = await fetch(`http://localhost:3001/admin/${adminId}`, {
-      method: "PATCH",
-      headers: {
-        Authorization: `Bearer ${adminToken}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ teamID: `${teamID}` }),
-    });
+    const response = await fetch(
+      `http://back-to-childhood.vercel.app/admin/${adminId}`,
+      {
+        method: "PATCH",
+        headers: {
+          Authorization: `Bearer ${adminToken}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ teamID: `${teamID}` }),
+      }
+    );
     const responseText = await response.text();
     // console.log(responseText);
   };
   const changeTeamStatusBack = async (teamID) => {
     // const object = { teamID: `${teamID}` };
-    const response = await fetch(`http://localhost:3001/team/${teamID}`, {
-      method: "PATCH",
-      headers: {
-        Authorization: `Bearer ${adminToken}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ task: adminTask }),
-    });
+    const response = await fetch(
+      `http://back-to-childhood.vercel.app/team/${teamID}`,
+      {
+        method: "PATCH",
+        headers: {
+          Authorization: `Bearer ${adminToken}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ task: adminTask }),
+      }
+    );
     const responseText = await response.text();
     // console.log(responseText);
   };

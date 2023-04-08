@@ -24,9 +24,12 @@ export default function Status() {
     getTeams();
   }, []);
   const getTeams = async () => {
-    const response = await fetch("http://localhost:3001/team/status", {
-      method: "GET",
-    });
+    const response = await fetch(
+      "http://back-to-childhood.vercel.app/team/status",
+      {
+        method: "GET",
+      }
+    );
     const data = await response.json();
     setStatusData(data);
   };
