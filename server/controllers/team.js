@@ -28,7 +28,7 @@ export const updateTask = async (req, res) => {
     const team = await Team.findById(id);
 
     const index = team.tasksDone.findIndex((t) => t === task);
-    console.log(index);
+    // console.log(index);
     if (index === -1) {
       team.tasksDone.push(task);
     } else {

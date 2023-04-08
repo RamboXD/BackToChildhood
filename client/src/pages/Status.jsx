@@ -5,7 +5,7 @@ import "./Status.scss";
 export default function Status() {
   const [statusData, setStatusData] = useState([]);
   const [tasks, setTasks] = useState([]);
-  console.log(statusData);
+  // console.log(statusData);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {

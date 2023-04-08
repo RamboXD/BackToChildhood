@@ -19,7 +19,7 @@ export const updateStatus = async (req, res) => {
     const index = admin.passed.findIndex(
       (team) => String(team) === String(teamID)
     );
-    console.log(index);
+    // console.log(index);
     if (index === -1) {
       admin.passed.push(String(teamID));
     } else {

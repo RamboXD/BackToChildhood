@@ -117,7 +117,7 @@ export default function Admin() {
     // onSubmitProps.resetForm();
 
     if (loggedIn) {
-      console.log(loggedIn);
+      // console.log(loggedIn);
       dispatch(
         setLogin({
           admin: loggedIn.admin,
@@ -134,10 +134,10 @@ export default function Admin() {
     dispatch(setLogout());
     navigate("/admin");
   };
-  console.log(isAuth);
-  console.log(teams);
-  console.log(user);
-  console.log(statusData);
+  // console.log(isAuth);
+  // console.log(teams);
+  // console.log(user);
+  // console.log(statusData);
   if (!isAuth) {
     return (
       <div style={{ height: "100%", width: "100%" }}>
