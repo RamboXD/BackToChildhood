@@ -3,7 +3,42 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import "./Admin.scss";
 import { setLogin, setLogout, setTasks } from "../state/index.js";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  pt: 2,
+  px: 4,
+  pb: 3,
+};
+
 export default function Admin() {
+  const [open, setOpen] = useState(false);
+  const [check, setCheck] = useState("");
+  const [currentTeam, setCurrentTeam] = useState("");
+  // console.log(currentTeam);
+  // console.log(check);
+  const handleOpen = (team) => {
+    setCurrentTeam(team);
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   const isAuth = useSelector((state) => state.admin);
   const adminToken = useSelector((state) => state.token);
   const adminId = useSelector((state) => state.id);
@@ -106,6 +141,7 @@ export default function Admin() {
       return e;
     });
     setStatusData(newStatus);
+    handleClose();
   }
   const [values, setValues] = useState({
     login: "",
@@ -264,6 +300,39 @@ export default function Admin() {
               justifyContent: "center",
             }}
           >
+            <Dialog open={open} onClose={handleClose}>
+              <DialogTitle>Confirmation</DialogTitle>
+              <DialogContent>
+                <DialogContentText>
+                  To confirm that team passed the task please type name of the
+                  team below{" "}
+                  <p style={{ color: "red" }}>{currentTeam.teamName}</p>
+                </DialogContentText>
+                <TextField
+                  autoFocus
+                  margin="dense"
+                  id="name"
+                  label="Team name"
+                  type="email"
+                  fullWidth
+                  variant="standard"
+                  onChange={(e) => {
+                    setCheck(e.target.value);
+                  }}
+                />
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={handleClose}>Cancel</Button>
+                {check === currentTeam.teamName && (
+                  <Button onClick={() => changeStatus(currentTeam)}>
+                    Subscribe
+                  </Button>
+                )}
+                {check != currentTeam.teamName && (
+                  <Button disable>Subscribe</Button>
+                )}
+              </DialogActions>
+            </Dialog>
             <div
               style={{
                 width: "100%",
@@ -408,7 +477,8 @@ export default function Admin() {
                   <button
                     type="submit"
                     style={{}}
-                    onClick={() => changeStatus(team)}
+                    onClick={() => handleOpen(team)}
+                    // onClick={() => changeStatus(team)}
                   >
                     {team.passed ? "Cancel" : "Passed"}
                   </button>
