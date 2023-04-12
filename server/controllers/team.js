@@ -14,7 +14,9 @@ export const createTeam = async (req, res) => {
 
 export const getTeams = async (req, res) => {
   try {
-    const teams = await Team.find({}).sort({ tasksDone: -1, lastSubmit: 1 });
+    const teams = await Team.aggregate()
+      .addFields({ length: { $size: `$tasksDone` } })
+      .sort({ length: -1, lastSubmit: 1 });
     res.status(200).json(teams);
   } catch (err) {
     res.status(404).json({ message: err.message });
