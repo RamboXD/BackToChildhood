@@ -104,7 +104,7 @@ export default function Status() {
           >
             <div
               style={{
-                width: "90%",
+                width: "80%",
                 height: "100%",
                 backgroundColor: "transparent",
                 // borderRadius: "5px",
@@ -124,8 +124,8 @@ export default function Status() {
                     margin: "5px",
                     borderWidth: "1px",
                     border: "solid",
-                    borderTopLeftRadius: "50px",
-                    borderBottomLeftRadius: "50px",
+                    borderTopLeftRadius: "25px",
+                    borderBottomLeftRadius: "25px",
                     // borderTop: "0.5px solid",
                     display: "flex",
                   }}
@@ -159,8 +159,8 @@ export default function Status() {
                           overflow: "hidden",
                           color: "white",
                           // border: "solid",
-                          borderTopLeftRadius: "50px",
-                          borderBottomLeftRadius: "50px",
+                          borderTopLeftRadius: "25px",
+                          borderBottomLeftRadius: "25px",
                           backgroundColor: "#c9b037",
                         }}
                       >
@@ -176,8 +176,8 @@ export default function Status() {
                           fontSize: "2vw",
                           justifyContent: "center",
                           alignItems: "center",
-                          borderTopLeftRadius: "50px",
-                          borderBottomLeftRadius: "50px",
+                          borderTopLeftRadius: "25px",
+                          borderBottomLeftRadius: "25px",
                           fontWeight: "bold",
                           overflow: "hidden",
                           color: "white",
@@ -194,8 +194,8 @@ export default function Status() {
                           width: "25%",
                           display: "flex",
                           fontSize: "2vw",
-                          borderTopLeftRadius: "50px",
-                          borderBottomLeftRadius: "50px",
+                          borderTopLeftRadius: "25px",
+                          borderBottomLeftRadius: "25px",
                           justifyContent: "center",
                           alignItems: "center",
                           fontWeight: "bold",
