@@ -11,6 +11,10 @@ const TeamSchema = new mongoose.Schema({
       required: false,
     },
   ],
+  lastSubmit: {
+    type: Date,
+    required: false,
+  },
 });
 
 const Team = mongoose.model("Team", TeamSchema);
