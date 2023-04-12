@@ -259,7 +259,7 @@ export default function Admin() {
           <div
             style={{
               width: "100%",
-              height: "12.5%",
+              height: "20",
               display: "flex",
               justifyContent: "center",
             }}
@@ -342,6 +342,7 @@ export default function Admin() {
               display: "flex",
               flexDirection: "column",
               justifyContent: "center",
+              marginTop: "20px",
               alignItems: "center",
             }}
           >
