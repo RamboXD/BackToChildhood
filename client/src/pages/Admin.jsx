@@ -325,11 +325,11 @@ export default function Admin() {
                 <Button onClick={handleClose}>Cancel</Button>
                 {check === currentTeam.teamName && (
                   <Button onClick={() => changeStatus(currentTeam)}>
-                    Subscribe
+                    Confirm
                   </Button>
                 )}
                 {check != currentTeam.teamName && (
-                  <Button disable>Subscribe</Button>
+                  <Button disable>Confirm</Button>
                 )}
               </DialogActions>
             </Dialog>
