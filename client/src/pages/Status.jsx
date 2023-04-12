@@ -15,19 +15,7 @@ export default function Status() {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-    }, 2000);
-    // setStatusData([
-    //   { teamNumber: 1, teamName: "tigr", passed: [1] },
-    //   { teamNumber: 2, teamName: "begemot", passed: [2] },
-    //   { teamNumber: 3, teamName: "zveri", passed: [3] },
-    //   { teamNumber: 4, teamName: "auf", passed: [4] },
-    //   { teamNumber: 5, teamName: "hans", passed: [5] },
-    //   { teamNumber: 6, teamName: "Kazakh", passed: [6] },
-    //   { teamNumber: 7, teamName: "bestTeam", passed: [7] },
-    //   { teamNumber: 8, teamName: "SpongeBob", passed: [8] },
-    //   { teamNumber: 9, teamName: "GGWP", passed: [9] },
-    //   { teamNumber: 10, teamName: "HEHE", passed: [10] },
-    // ]);
+    }, 3000);
     setTasks([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
 
     getTeams();
@@ -48,7 +36,7 @@ export default function Status() {
   };
   return (
     <div style={{ height: "100%", width: "100%" }}>
-      {loading ? (
+      {loading && !statusData.length ? (
         <div
           style={{
             height: "100%",
@@ -79,13 +67,18 @@ export default function Status() {
                   height: "100%",
                   width: "100%",
                   fontSize: "4vw",
+                  borderRadius: "20px",
+                  borderColor: "black",
+                  borderWidth: "1px",
+                  boxShadow: "none",
                   // backgroundImage: `url(${BG})`,
-                  backgroundColor: "#ffffff",
+                  backgroundColor: "#E8A87C",
+                  color: "white",
                   // backgroundSize: "cover",
                   // backgroundRepeat: "no-repeat",
                 }}
               >
-                I am Admin
+                For Admin
               </button>
             </Link>
             {/* <button
@@ -114,40 +107,147 @@ export default function Status() {
                 width: "90%",
                 height: "100%",
                 backgroundColor: "transparent",
-                borderRadius: "5px",
-                border: "solid",
-                borderWidth: "1px",
+                // borderRadius: "5px",
+                // border: "solid",
+                // borderWidth: "1px",
                 display: "flex",
                 flexDirection: "column",
               }}
             >
-              {statusData.map((stat) => (
+              {statusData.map((stat, index) => (
                 // return (
                 <div
                   key={stat.teamNumber}
                   style={{
                     height: "10%",
                     width: "100%",
-                    borderTop: "0.5px solid",
+                    margin: "5px",
+                    borderWidth: "1px",
+                    border: "solid",
+                    borderTopLeftRadius: "50px",
+                    borderBottomLeftRadius: "50px",
+                    // borderTop: "0.5px solid",
                     display: "flex",
                   }}
                 >
                   <div
                     style={{
                       height: "100%",
-                      width: "20%",
+                      width: "25%",
                       display: "flex",
-                      fontSize: "2.5vw",
+                      fontSize: "2vw",
                       justifyContent: "center",
                       alignItems: "center",
                       fontWeight: "bold",
-                      color: "#000000",
+                      // border: "solid",
+                      // borderTopLeftRadius: "50px",
+                      // borderBottomLeftRadius: "50px",
+                      overflow: "hidden",
+                      color: "white",
                     }}
                   >
-                    {stat.teamName}
+                    {index === 0 && (
+                      <div
+                        style={{
+                          height: "100%",
+                          width: "25%",
+                          display: "flex",
+                          fontSize: "2vw",
+                          justifyContent: "center",
+                          alignItems: "center",
+                          fontWeight: "bold",
+                          overflow: "hidden",
+                          color: "white",
+                          // border: "solid",
+                          borderTopLeftRadius: "50px",
+                          borderBottomLeftRadius: "50px",
+                          backgroundColor: "#c9b037",
+                        }}
+                      >
+                        {index + 1}
+                      </div>
+                    )}
+                    {index === 1 && (
+                      <div
+                        style={{
+                          height: "100%",
+                          width: "25%",
+                          display: "flex",
+                          fontSize: "2vw",
+                          justifyContent: "center",
+                          alignItems: "center",
+                          borderTopLeftRadius: "50px",
+                          borderBottomLeftRadius: "50px",
+                          fontWeight: "bold",
+                          overflow: "hidden",
+                          color: "white",
+                          backgroundColor: "#d7d7d7",
+                        }}
+                      >
+                        {index + 1}
+                      </div>
+                    )}
+                    {index === 2 && (
+                      <div
+                        style={{
+                          height: "100%",
+                          width: "25%",
+                          display: "flex",
+                          fontSize: "2vw",
+                          borderTopLeftRadius: "50px",
+                          borderBottomLeftRadius: "50px",
+                          justifyContent: "center",
+                          alignItems: "center",
+                          fontWeight: "bold",
+                          overflow: "hidden",
+                          color: "white",
+                          backgroundColor: "#ad8a56",
+                        }}
+                      >
+                        {index + 1}
+                      </div>
+                    )}
+                    {index > 2 && (
+                      <div
+                        style={{
+                          height: "100%",
+                          width: "25%",
+                          display: "flex",
+                          fontSize: "2vw",
+                          justifyContent: "center",
+                          alignItems: "center",
+                          fontWeight: "bold",
+                          overflow: "hidden",
+                          color: "white",
+                        }}
+                      >
+                        {index + 1}
+                      </div>
+                    )}
+
+                    <div
+                      style={{
+                        height: "100%",
+                        width: "75%",
+                        display: "flex",
+                        fontSize: "2vw",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        fontWeight: "bold",
+                        overflow: "hidden",
+                        color: "white",
+                      }}
+                    >
+                      {stat.teamName}
+                    </div>
                   </div>
                   <div
-                    style={{ height: "100%", width: "80%", display: "flex" }}
+                    style={{
+                      height: "100%",
+                      width: "75%",
+                      display: "flex",
+                      overflow: "hidden",
+                    }}
                   >
                     {tasks.map((task) => (
                       <div
@@ -174,7 +274,8 @@ export default function Status() {
                                 alignItems: "center",
                                 fontSize: "3vw",
                                 borderLeft: "0.5px solid",
-                                backgroundColor: "#f92f2f",
+                                backgroundColor: "#E27D5F",
+                                overflow: "hidden",
                                 // backgroundColor: "transparent",
                               }
                         }

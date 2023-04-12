@@ -163,6 +163,16 @@ export default function Admin() {
                 style={{
                   height: "100%",
                   width: "100%",
+                  fontSize: "4vw",
+                  borderRadius: "20px",
+                  borderColor: "black",
+                  borderWidth: "1px",
+                  boxShadow: "none",
+                  // backgroundImage: `url(${BG})`,
+                  backgroundColor: "#E8A87C",
+                  color: "white",
+                  // backgroundSize: "cover",
+                  // backgroundRepeat: "no-repeat",
                 }}
               >
                 Status
@@ -191,7 +201,7 @@ export default function Admin() {
           }}
         >
           <form className="wrapper">
-            <h2>WelCum Master!</h2>
+            <h2>Welcome Master!</h2>
             <section className="group">
               <input
                 type="text"
@@ -230,7 +240,7 @@ export default function Admin() {
               }}
               className="btn"
             >
-              Please, WelCum
+              Enter
             </button>
             <span className="footer"></span>
           </form>
@@ -266,7 +276,20 @@ export default function Admin() {
                 onClick={() => {
                   navigate("/");
                 }}
-                style={{ height: "60%", width: "30%" }}
+                style={{
+                  height: "60%",
+                  fontWeight: "bold",
+                  width: "30%",
+                  borderRadius: "20px",
+                  borderColor: "black",
+                  borderWidth: "1px",
+                  boxShadow: "none",
+                  // backgroundImage: `url(${BG})`,
+                  backgroundColor: "#E8A87C",
+                  color: "white",
+                  // backgroundSize: "cover",
+                  // backgroundRepeat: "no-repeat",
+                }}
               >
                 Status
               </button>
@@ -274,6 +297,16 @@ export default function Admin() {
                 style={{
                   height: "60%",
                   width: "30%",
+                  fontWeight: "bold",
+                  borderRadius: "20px",
+                  borderColor: "black",
+                  borderWidth: "1px",
+                  boxShadow: "none",
+                  // backgroundImage: `url(${BG})`,
+                  backgroundColor: "#E8A87C",
+                  color: "white",
+                  // backgroundSize: "cover",
+                  // backgroundRepeat: "no-repeat",
                 }}
               >
                 INFO
@@ -282,6 +315,16 @@ export default function Admin() {
                 style={{
                   height: "60%",
                   width: "30%",
+                  borderRadius: "20px",
+                  borderColor: "black",
+                  borderWidth: "1px",
+                  fontWeight: "bold",
+                  boxShadow: "none",
+                  // backgroundImage: `url(${BG})`,
+                  backgroundColor: "#E8A87C",
+                  color: "white",
+                  // backgroundSize: "cover",
+                  // backgroundRepeat: "no-repeat",
                 }}
                 onClick={() => {
                   logout();
@@ -337,8 +380,17 @@ export default function Admin() {
                   <div
                     style={
                       team.passed
-                        ? { fontSize: "1rem" }
-                        : { fontSize: "1rem", color: "white" }
+                        ? {
+                            fontSize: "0.7rem",
+                            width: "100%",
+                            fontWeight: "bold",
+                          }
+                        : {
+                            fontSize: "0.7rem",
+                            width: "100%",
+                            fontWeight: "bold",
+                            color: "white",
+                          }
                     }
                   >
                     {team.teamName}
