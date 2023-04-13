@@ -4,6 +4,7 @@ import "./Status.scss";
 import { useDispatch } from "react-redux";
 import { setLogout } from "../state/index.js";
 import { Typography } from "@mui/material";
+import { isMobile } from "react-device-detect";
 
 export default function Status() {
   const [statusData, setStatusData] = useState([]);
@@ -35,6 +36,7 @@ export default function Status() {
     dispatch(setLogout());
     navigate("/admin");
   };
+  // console.log(isMobile);
   return (
     <div style={{ height: "100%", width: "100%" }}>
       {!statusData.length ? (
@@ -231,7 +233,7 @@ export default function Status() {
                         height: "100%",
                         width: "75%",
                         display: "flex",
-                        fontSize: "2vw",
+                        fontSize: isMobile ? "3vw" : "1.5vw",
                         justifyContent: "center",
                         alignItems: "center",
                         fontWeight: "bold",
@@ -239,7 +241,7 @@ export default function Status() {
                         color: "white",
                       }}
                     >
-                      <Typography variant="h8">{stat.teamName}</Typography>
+                      {stat.teamName}
                     </div>
                   </div>
                   <div
