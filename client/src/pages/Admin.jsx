@@ -69,16 +69,16 @@ export default function Admin() {
     // console.log(result);
     setStatusData(result);
   }
-  const getTeams = async () => {
-    const response = await fetch(
-      "https://back-to-childhood.vercel.app/team/status",
-      {
-        method: "GET",
-      }
-    );
-    const data = await response.json();
-    setTeams(data);
-  };
+  // const getTeams = async () => {
+  //   const response = await fetch(
+  //     "https://back-to-childhood.vercel.app/team/status",
+  //     {
+  //       method: "GET",
+  //     }
+  //   );
+  //   const data = await response.json();
+  //   setTeams(data);
+  // };
   const getAdmin = async () => {
     const response = await fetch(
       `https://back-to-childhood.vercel.app/admin/${adminId}`,
