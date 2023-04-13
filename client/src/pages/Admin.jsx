@@ -114,22 +114,22 @@ export default function Admin() {
     // }
     // console.log(responseText);
   };
-  const changeTeamStatusBack = async (teamID) => {
-    // const object = { teamID: `${teamID}` };
-    const response = await fetch(
-      `https://back-to-childhood.vercel.app/team/${teamID}`,
-      {
-        method: "PATCH",
-        headers: {
-          Authorization: `Bearer ${adminToken}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ task: adminTask }),
-      }
-    );
-    const responseText = await response.text();
-    // console.log(responseText);
-  };
+  // const changeTeamStatusBack = async (teamID) => {
+  //   // const object = { teamID: `${teamID}` };
+  //   const response = await fetch(
+  //     `https://back-to-childhood.vercel.app/team/${teamID}`,
+  //     {
+  //       method: "PATCH",
+  //       headers: {
+  //         Authorization: `Bearer ${adminToken}`,
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({ task: adminTask }),
+  //     }
+  //   );
+  //   const responseText = await response.text();
+  //   // console.log(responseText);
+  // };
   const changeStatus = (current) => {
     changeStatusBack(current._id);
     // changeTeamStatusBack(current._id);
