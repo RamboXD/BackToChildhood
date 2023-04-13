@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import "./Status.scss";
 import { useDispatch } from "react-redux";
 import { setLogout } from "../state/index.js";
+import { Typography } from "@mui/material";
 
 export default function Status() {
   const [statusData, setStatusData] = useState([]);
@@ -36,7 +37,7 @@ export default function Status() {
   };
   return (
     <div style={{ height: "100%", width: "100%" }}>
-      {loading && !statusData.length ? (
+      {!statusData.length ? (
         <div
           style={{
             height: "100%",
@@ -238,7 +239,7 @@ export default function Status() {
                         color: "white",
                       }}
                     >
-                      {stat.teamName}
+                      <Typography variant="h8">{stat.teamName}</Typography>
                     </div>
                   </div>
                   <div

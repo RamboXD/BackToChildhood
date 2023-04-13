@@ -43,7 +43,7 @@ export default function Admin() {
   const adminToken = useSelector((state) => state.token);
   const adminId = useSelector((state) => state.id);
   const adminTask = useSelector((state) => state.task);
-  const [statusData, setStatusData] = useState();
+  const [statusData, setStatusData] = useState([]);
   const dispatch = useDispatch();
   const [user, setUser] = useState();
   const navigate = useNavigate();
@@ -60,7 +60,7 @@ export default function Admin() {
   // console.log(user);
   // console.log(teams);
   // console.log(statusData);
-  if (teams && user && !statusData) {
+  if (teams && user && !statusData.length) {
     const result = teams.map((team) => {
       if (user.passed.find((element) => element === team._id))
         return { ...team, passed: true };
@@ -69,7 +69,6 @@ export default function Admin() {
     // console.log(result);
     setStatusData(result);
   }
-
   const getTeams = async () => {
     const response = await fetch(
       "https://back-to-childhood.vercel.app/team/status",
@@ -284,209 +283,202 @@ export default function Admin() {
       </div>
     );
   } else {
-    if (!statusData) {
-      <div style={{ height: "100%", width: "100%" }} className="loading">
-        <div></div>
-        <div></div>
-      </div>;
-    } else
-      return (
-        <div style={{ height: "100%", width: "100%" }}>
+    return (
+      <div style={{ height: "100%", width: "100%" }}>
+        {!statusData.length ? (
           <div
             style={{
+              height: "100%",
               width: "100%",
-              height: "12.5%",
               display: "flex",
+              alignItems: "center",
               justifyContent: "center",
             }}
           >
-            <Dialog open={open} onClose={handleClose}>
-              <DialogTitle>Confirmation</DialogTitle>
-              <DialogContent>
-                <DialogContentText>
-                  To confirm that team passed the task please type name of the
-                  team below{" "}
-                  <p style={{ color: "red" }}>{currentTeam.teamName}</p>
-                </DialogContentText>
-                <TextField
-                  autoFocus
-                  margin="dense"
-                  id="name"
-                  label="Team name"
-                  type="email"
-                  fullWidth
-                  variant="standard"
-                  onChange={(e) => {
-                    setCheck(e.target.value);
-                  }}
-                />
-              </DialogContent>
-              <DialogActions>
-                <Button onClick={handleClose}>Cancel</Button>
-                {check === currentTeam.teamName && (
-                  <Button onClick={() => changeStatus(currentTeam)}>
-                    Confirm
-                  </Button>
-                )}
-                {check != currentTeam.teamName && (
-                  <Button disable>Confirm</Button>
-                )}
-              </DialogActions>
-            </Dialog>
+            <div className="loading">
+              <div></div>
+              <div></div>
+            </div>
+          </div>
+        ) : (
+          <>
             <div
               style={{
                 width: "100%",
-                height: "100%",
+                height: "12.5%",
                 display: "flex",
-                justifyContent: "space-around",
+                justifyContent: "center",
               }}
             >
-              <button
-                onClick={() => {
-                  navigate("/");
-                }}
-                style={{
-                  height: "60%",
-                  fontWeight: "bold",
-                  width: "30%",
-                  borderRadius: "20px",
-                  borderColor: "black",
-                  borderWidth: "1px",
-                  boxShadow: "none",
-                  // backgroundImage: `url(${BG})`,
-                  backgroundColor: "#E8A87C",
-                  color: "white",
-                  // backgroundSize: "cover",
-                  // backgroundRepeat: "no-repeat",
-                }}
-              >
-                Status
-              </button>
-              <button
-                style={{
-                  height: "60%",
-                  width: "30%",
-                  fontWeight: "bold",
-                  borderRadius: "20px",
-                  borderColor: "black",
-                  borderWidth: "1px",
-                  boxShadow: "none",
-                  // backgroundImage: `url(${BG})`,
-                  backgroundColor: "#E8A87C",
-                  color: "white",
-                  // backgroundSize: "cover",
-                  // backgroundRepeat: "no-repeat",
-                }}
-              >
-                INFO
-              </button>
-              <button
-                style={{
-                  height: "60%",
-                  width: "30%",
-                  borderRadius: "20px",
-                  borderColor: "black",
-                  borderWidth: "1px",
-                  fontWeight: "bold",
-                  boxShadow: "none",
-                  // backgroundImage: `url(${BG})`,
-                  backgroundColor: "#E8A87C",
-                  color: "white",
-                  // backgroundSize: "cover",
-                  // backgroundRepeat: "no-repeat",
-                }}
-                onClick={() => {
-                  logout();
-                }}
-              >
-                LogOut
-              </button>
-            </div>
-          </div>
-          <div
-            style={{
-              width: "100%",
-              overflow: "scroll",
-              height: "80%",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            {statusData.map((team) => (
+              <Dialog open={open} onClose={handleClose}>
+                <DialogTitle>Confirmation</DialogTitle>
+                <DialogContent>
+                  <DialogContentText>
+                    To confirm that team passed the task please type name of the
+                    team below{" "}
+                    <p style={{ color: "red" }}>{currentTeam.teamName}</p>
+                  </DialogContentText>
+                  <TextField
+                    autoFocus
+                    margin="dense"
+                    id="name"
+                    label="Team name"
+                    type="email"
+                    fullWidth
+                    variant="standard"
+                    onChange={(e) => {
+                      setCheck(e.target.value);
+                    }}
+                  />
+                </DialogContent>
+                <DialogActions>
+                  <Button onClick={handleClose}>Cancel</Button>
+                  {check === currentTeam.teamName && (
+                    <Button onClick={() => changeStatus(currentTeam)}>
+                      Confirm
+                    </Button>
+                  )}
+                  {check !== currentTeam.teamName && <Button>Confirm</Button>}
+                </DialogActions>
+              </Dialog>
               <div
-                style={
-                  !team.passed
-                    ? {
-                        width: "75%",
-                        height: "100%",
-                        marginBottom: "30px",
-                        display: "flex",
-                        flexDirection: "row",
-                        justifyContent: "space-between",
-                        alignItems: "center",
-                        overflow: "hidden",
-                        backgroundColor: "  #ff3333",
-                        borderRadius: "15px",
-                      }
-                    : {
-                        width: "75%",
-                        height: "100%",
-                        marginBottom: "30px",
-                        display: "flex",
-                        flexDirection: "row",
-                        justifyContent: "space-between",
-                        alignItems: "center",
-                        overflow: "hidden",
-                        backgroundColor: " #ccff99",
-                        borderRadius: "15px",
-                      }
-                }
-                key={team._id}
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  display: "flex",
+                  justifyContent: "space-around",
+                }}
               >
-                <div style={{ paddingLeft: "20px", width: "20%" }}>
-                  <div
-                    style={
-                      team.passed
-                        ? {
-                            fontSize: "0.7rem",
-                            width: "100%",
-                            fontWeight: "bold",
-                          }
-                        : {
-                            fontSize: "0.7rem",
-                            width: "100%",
-                            fontWeight: "bold",
-                            color: "white",
-                          }
-                    }
-                  >
-                    {team.teamName}
-                  </div>
-                </div>
-                <div
+                <button
+                  onClick={() => {
+                    navigate("/");
+                  }}
                   style={{
-                    width: "50%",
-                    height: "100%",
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "flex-end",
+                    height: "60%",
+                    fontWeight: "bold",
+                    width: "30%",
+                    borderRadius: "20px",
+                    borderColor: "black",
+                    borderWidth: "1px",
+                    boxShadow: "none",
+                    // backgroundImage: `url(${BG})`,
+                    backgroundColor: "#E8A87C",
+                    color: "white",
+                    // backgroundSize: "cover",
+                    // backgroundRepeat: "no-repeat",
                   }}
                 >
-                  <button
-                    type="submit"
-                    style={{}}
-                    onClick={() => handleOpen(team)}
-                    // onClick={() => changeStatus(team)}
-                  >
-                    {team.passed ? "Cancel" : "Passed"}
-                  </button>
-                </div>
+                  Status
+                </button>
+                <button
+                  style={{
+                    height: "60%",
+                    width: "30%",
+                    borderRadius: "20px",
+                    borderColor: "black",
+                    borderWidth: "1px",
+                    fontWeight: "bold",
+                    boxShadow: "none",
+                    // backgroundImage: `url(${BG})`,
+                    backgroundColor: "#E8A87C",
+                    color: "white",
+                    // backgroundSize: "cover",
+                    // backgroundRepeat: "no-repeat",
+                  }}
+                  onClick={() => {
+                    logout();
+                  }}
+                >
+                  LogOut
+                </button>
               </div>
-            ))}
-          </div>
-        </div>
-      );
+            </div>
+            <div
+              style={{
+                width: "100%",
+                overflow: "scroll",
+                height: "80%",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              {statusData.map((team) => (
+                <div
+                  style={
+                    !team.passed
+                      ? {
+                          width: "75%",
+                          height: "100%",
+                          marginBottom: "30px",
+                          display: "flex",
+                          flexDirection: "row",
+                          justifyContent: "space-between",
+                          alignItems: "center",
+                          overflow: "hidden",
+                          backgroundColor: "  #ff3333",
+                          borderRadius: "15px",
+                        }
+                      : {
+                          width: "75%",
+                          height: "100%",
+                          marginBottom: "30px",
+                          display: "flex",
+                          flexDirection: "row",
+                          justifyContent: "space-between",
+                          alignItems: "center",
+                          overflow: "hidden",
+                          backgroundColor: " #ccff99",
+                          borderRadius: "15px",
+                        }
+                  }
+                  key={team._id}
+                >
+                  <div style={{ paddingLeft: "20px", width: "20%" }}>
+                    <div
+                      style={
+                        team.passed
+                          ? {
+                              fontSize: "0.7rem",
+                              width: "100%",
+                              fontWeight: "bold",
+                            }
+                          : {
+                              fontSize: "0.7rem",
+                              width: "100%",
+                              fontWeight: "bold",
+                              color: "white",
+                            }
+                      }
+                    >
+                      {team.teamName}
+                    </div>
+                  </div>
+                  <div
+                    style={{
+                      width: "50%",
+                      height: "100%",
+                      display: "flex",
+                      flexDirection: "row",
+                      justifyContent: "flex-end",
+                    }}
+                  >
+                    <button
+                      type="submit"
+                      style={{}}
+                      onClick={() => handleOpen(team)}
+                      // onClick={() => changeStatus(team)}
+                    >
+                      {team.passed ? "Cancel" : "Passed"}
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </>
+        )}
+      </div>
+    );
   }
 }
