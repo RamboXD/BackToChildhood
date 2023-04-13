@@ -5,7 +5,10 @@ export const getAdmin = async (req, res) => {
   try {
     const { id } = req.params;
     const admin = await Admin.findById(id);
-    res.status(200).json(admin);
+    const teams = await Team.aggregate()
+      .addFields({ length: { $size: `$tasksDone` } })
+      .sort({ length: -1, lastSubmit: 1 });
+    res.status(200).json({ admin, teams });
   } catch (err) {
     res.status(404).json({ message: err.message });
   }

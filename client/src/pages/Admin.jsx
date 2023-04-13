@@ -54,7 +54,7 @@ export default function Admin() {
     if (isAuth) {
       // setUser(isAuth);
       getAdmin();
-      getTeams();
+      // getTeams();
     }
   }, []);
   // console.log(user);
@@ -88,7 +88,8 @@ export default function Admin() {
       }
     );
     const data = await response.json();
-    setUser(data);
+    setUser(data.admin);
+    setTeams(data.teams);
   };
   const changeStatusBack = async (teamID) => {
     // const object = { teamID: `${teamID}` };

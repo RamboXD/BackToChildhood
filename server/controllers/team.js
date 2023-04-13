@@ -23,25 +23,25 @@ export const getTeams = async (req, res) => {
   }
 };
 
-export const updateTask = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const { task } = req.body;
-    const team = await Team.findById(id);
+// export const updateTask = async (req, res) => {
+//   try {
+//     const { id } = req.params;
+//     const { task } = req.body;
+//     const team = await Team.findById(id);
 
-    const index = team.tasksDone.findIndex((t) => t === task);
-    // console.log(index);
-    if (index === -1) {
-      team.tasksDone.push(task);
-    } else {
-      team.tasksDone = team.tasksDone.filter((t) => t !== task);
-    }
-    team.lastSubmit = new Date().toISOString();
-    const updatedTeam = await Team.findByIdAndUpdate(id, team, {
-      new: true,
-    });
-    res.status(200).json(updatedTeam);
-  } catch (err) {
-    res.status(404).json({ message: err.message });
-  }
-};
+//     const index = team.tasksDone.findIndex((t) => t === task);
+//     // console.log(index);
+//     if (index === -1) {
+//       team.tasksDone.push(task);
+//     } else {
+//       team.tasksDone = team.tasksDone.filter((t) => t !== task);
+//     }
+//     team.lastSubmit = new Date().toISOString();
+//     const updatedTeam = await Team.findByIdAndUpdate(id, team, {
+//       new: true,
+//     });
+//     res.status(200).json(updatedTeam);
+//   } catch (err) {
+//     res.status(404).json({ message: err.message });
+//   }
+// };
