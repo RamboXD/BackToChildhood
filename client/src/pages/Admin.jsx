@@ -132,7 +132,7 @@ export default function Admin() {
   };
   const changeStatus = (current) => {
     changeStatusBack(current._id);
-    changeTeamStatusBack(current._id);
+    // changeTeamStatusBack(current._id);
     const newStatus = statusData.map((e) => {
       if (e._id === current._id) {
         e.passed = !e.passed;
