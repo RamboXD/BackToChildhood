@@ -130,7 +130,7 @@ export default function Admin() {
     const responseText = await response.text();
     // console.log(responseText);
   };
-  function changeStatus(current) {
+  const changeStatus = (current) => {
     changeStatusBack(current._id);
     changeTeamStatusBack(current._id);
     const newStatus = statusData.map((e) => {
@@ -141,7 +141,7 @@ export default function Admin() {
     });
     setStatusData(newStatus);
     handleClose();
-  }
+  };
   const [values, setValues] = useState({
     login: "",
     password: "",
@@ -440,12 +440,12 @@ export default function Admin() {
                       style={
                         team.passed
                           ? {
-                              fontSize: "0.7rem",
+                              fontSize: "0.5rem",
                               width: "100%",
                               fontWeight: "bold",
                             }
                           : {
-                              fontSize: "0.7rem",
+                              fontSize: "0.5rem",
                               width: "100%",
                               fontWeight: "bold",
                               color: "white",
